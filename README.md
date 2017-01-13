@@ -41,7 +41,7 @@ ex.Case().Middle("中項目1-2").Small("小項目1-2-1").Test("テスト内容1-
 ex.Close()
 ```
 出力イメージ
-![top-page](https://raw.githubusercontent.com/loadoff/escase/images/screen1.png)
+![top-page](https://raw.githubusercontent.com/loadoff/excase/images/screen1.png)
 
 作成されるファイルのパスを確認する[ex.FilePath]に保管されてる
 ```go
