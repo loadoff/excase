@@ -17,27 +17,29 @@ Excelファイルにテストケースと結果を出力するために使用す
 
 ```go
 // ケースの作成準備
-ex := InitExCase()
+ex := excase.InitExCase()
 // ケースの作成
-ex.Case()
+sec := ex.OpenSection("テストシート名")
 // 大項目のセット
-ex.Large("大項目1")
+sec.Large("大項目1")
 // 中項目のセット
-ex.Middle("中項目1-1")
+sec.Middle("中項目1-1")
 // 小項目のセット
-ex.Small("小項目1-1-1")
+sec.Small("小項目1-1-1")
 // テストの内容と合格条件をセット
-ex.Test("テスト内容1-1-1-1", "合格条件1-1-1-1")
+test := sec.Test("テスト内容1-1-1-1", "合格条件1-1-1-1")
 // 合格をセット
-ex.Passed()
+test.Passed()
 // 次の行に小項目とテスト内容と合格条件のみセット
-ex.Case()
-ex.Small("小項目1-1-2")
-ex.Test("テスト内容1-1-1-2", "合格条件1-1-1-2")
+sec.Small("小項目1-1-2")
+test = sec.Test("テスト内容1-1-1-2", "合格条件1-1-1-2")
 // 不合格をセット
-ex.Failed()
+test.Failed()
 // チェーンして書くことも可能
-ex.Case().Middle("中項目1-2").Small("小項目1-2-1").Test("テスト内容1-2-1-1", "合格条件1-2-1-1").Passed()
+sec.Middle("中項目1-2").Small("小項目1-2-1").Test("テスト内容1-2-1-1", "合格条件1-2-1-1").Passed()
+// セクションを閉じる
+sec.CloseSection()
+// テスト出力終了
 ex.Close()
 ```
 出力イメージ
@@ -45,7 +47,7 @@ ex.Close()
 
 作成されるファイルのパスを確認する[ex.FilePath]に保管されてる
 ```go
-ex := InitExCase()
+ex := excase.InitExCase()
 fmt.Println(ex.FilePath)
 ex.Close()
 ```
