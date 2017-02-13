@@ -2,8 +2,6 @@ package excase
 
 import (
 	"fmt"
-	"io/ioutil"
-	"os"
 	"strconv"
 	"strings"
 	"time"
@@ -60,6 +58,7 @@ type ExSection struct {
 	small       string
 }
 
+// ExTest テストの出力行
 type ExTest struct {
 	row *excl.Row
 }
@@ -69,9 +68,8 @@ func InitExCase() *ExCase {
 	var err error
 	ex := &ExCase{}
 	ex.FilePath = strings.Replace(time.Now().Format("20060102030405"), ".", "", 1) + ".xlsx"
-	ex.dir, err = ioutil.TempDir("", "expand"+strings.Replace(time.Now().Format("20060102030405"), ".", "", 1))
 
-	if ex.caseBook, err = excl.CreateWorkbook(ex.dir, ex.FilePath); err != nil {
+	if ex.caseBook, err = excl.Create(); err != nil {
 		fmt.Println(err.Error())
 		return nil
 	}
@@ -199,8 +197,7 @@ func (ex *ExCase) Close() {
 	for _, sec := range ex.sections {
 		sec.CloseSection()
 	}
-	ex.caseBook.Close()
-	os.RemoveAll(ex.dir)
+	ex.caseBook.Save(ex.FilePath)
 }
 
 // Large 大項目をセット
