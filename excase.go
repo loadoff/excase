@@ -159,6 +159,19 @@ func (ex *ExCase) OpenSection(name string) *ExSection {
 	caseRow.SetString("検証者", 16).SetStyle(style)
 	caseRow.SetString("結果", 17).SetStyle(style)
 	ex.sections = append(ex.sections, sec)
+	sec.caseSheet.SetColWidth(4, 1)    // A
+	sec.caseSheet.SetColWidth(25, 2)   // B
+	sec.caseSheet.SetColWidth(4, 3)    // C
+	sec.caseSheet.SetColWidth(25, 4)   // D
+	sec.caseSheet.SetColWidth(4, 5)    // E
+	sec.caseSheet.SetColWidth(25, 6)   // F
+	sec.caseSheet.SetColWidth(4, 7)    // G
+	sec.caseSheet.SetColWidth(30, 8)   // H
+	sec.caseSheet.SetColWidth(30, 9)   // I
+	sec.caseSheet.SetColWidth(6.5, 10) // J
+	sec.caseSheet.SetColWidth(6.5, 11) // K
+	sec.caseSheet.SetColWidth(6.5, 12) // L
+	sec.caseSheet.SetColWidth(25, 13)  // M
 	return sec
 }
 
