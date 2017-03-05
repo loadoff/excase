@@ -159,6 +159,7 @@ func (ex *ExCase) OpenSection(name string) *ExSection {
 	caseRow.SetString("検証者", 16).SetStyle(style)
 	caseRow.SetString("結果", 17).SetStyle(style)
 	ex.sections = append(ex.sections, sec)
+
 	sec.caseSheet.SetColWidth(4, 1)    // A
 	sec.caseSheet.SetColWidth(25, 2)   // B
 	sec.caseSheet.SetColWidth(4, 3)    // C
@@ -321,5 +322,36 @@ func (test *ExTest) Failed() *ExTest {
 	test.row.GetCell(15).SetBackgroundColor("fb0a2a")
 	test.row.GetCell(16).SetBackgroundColor("fb0a2a")
 	test.row.GetCell(17).SetBackgroundColor("fb0a2a")
+	return test
+}
+
+// Unexecuted 未実施をセット
+func (test *ExTest) Unexecuted() *ExTest {
+	test.row.SetString("未実施", 12)
+
+	test.row.GetCell(1).SetBackgroundColor("d9d9d9")
+	test.row.GetCell(2).SetBackgroundColor("d9d9d9")
+	test.row.GetCell(3).SetBackgroundColor("d9d9d9")
+	test.row.GetCell(4).SetBackgroundColor("d9d9d9")
+	test.row.GetCell(5).SetBackgroundColor("d9d9d9")
+	test.row.GetCell(6).SetBackgroundColor("d9d9d9")
+	test.row.GetCell(7).SetBackgroundColor("d9d9d9")
+	test.row.GetCell(8).SetBackgroundColor("d9d9d9")
+	test.row.GetCell(9).SetBackgroundColor("d9d9d9")
+	test.row.GetCell(10).SetBackgroundColor("d9d9d9")
+	test.row.GetCell(11).SetBackgroundColor("d9d9d9")
+	test.row.GetCell(12).SetBackgroundColor("d9d9d9")
+	test.row.GetCell(13).SetBackgroundColor("d9d9d9")
+	test.row.GetCell(14).SetBackgroundColor("d9d9d9")
+	test.row.GetCell(15).SetBackgroundColor("d9d9d9")
+	test.row.GetCell(16).SetBackgroundColor("d9d9d9")
+	test.row.GetCell(17).SetBackgroundColor("d9d9d9")
+	return test
+}
+
+// Info 補足情報をセットする
+func (test *ExTest) Info(info string) *ExTest {
+	test.row.SetString(time.Now().Format("01/02"), 10)
+	test.row.SetString(info, 13)
 	return test
 }
